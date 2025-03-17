@@ -9,7 +9,6 @@ public class KeyCollectible : MonoBehaviour
         PlayerScript player = o.GetComponent<PlayerScript>();
         if (player != null)
         {
-            player.AddKey(1);
             Destroy(gameObject);
         }
     }

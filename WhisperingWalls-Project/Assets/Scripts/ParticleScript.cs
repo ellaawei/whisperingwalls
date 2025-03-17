@@ -19,7 +19,9 @@ public class ParticleScript : MonoBehaviour
             once = false;
             Destroy(sr);
             Invoke(nameof(DestroyObj), dur);
-            p.AddKey(1);
+            MainGameManager.instance.addKey(1);
+
+            //p.AddKey(1);
         }
     }
     void DestroyObj()

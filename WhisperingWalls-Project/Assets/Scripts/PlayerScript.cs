@@ -15,9 +15,9 @@ public class PlayerScript : MonoBehaviour
     bool hasFlashlight;
     public bool hasFlashlight2 { get { return hasFlashlight; } }
     bool gameIsOver;
-    public TextMeshProUGUI keysCollected;
+    //public TextMeshProUGUI keysCollected;
     public TextMeshProUGUI batteriesCollected;
-    int keys;
+    //int keys;
     public TextMeshProUGUI gameOver;
     Vector2 lookDirection = new Vector2(1, 0);
     Animator animator;
@@ -38,9 +38,9 @@ public class PlayerScript : MonoBehaviour
         haslives = true;
         gameOver.text = "";
         batteries = 0;
-        keys = 0;
+        //keys = 0;
         batteriesCollected.text = "" + batteries;
-        keysCollected.text = "" + keys;
+        //keysCollected.text = "" + keys;
         gameIsOver = false;
         hasFlashlight = false;
         flashlightText.text = "Flashlight: Not Collected";
@@ -75,6 +75,7 @@ public class PlayerScript : MonoBehaviour
             animator.SetFloat("Look X", lookDirection.x);
             animator.SetFloat("Look Y", lookDirection.y);
             animator.SetFloat("Speed", move.magnitude);
+
             if (Input.GetKeyDown(KeyCode.X))
             {
                 RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
@@ -121,6 +122,7 @@ public class PlayerScript : MonoBehaviour
             gameOver.text = "Game Lost";
             gameIsOver = true;
         }
+
         if (hasFlashlight && batteries >= 2)
         {
             hiddenPassage.SetActive(true);
@@ -129,7 +131,7 @@ public class PlayerScript : MonoBehaviour
         {
             hiddenPassage.SetActive(false);
         }
-        if (batteries > 0 && hasFlashlight && keys == 3)
+        if (batteries > 0 && hasFlashlight && MainGameManager.instance.getKeys() == 3)
         {
             gameIsOver = true;
             gameOver.text = "Game Won!\nYou made it out of the mansion";
@@ -138,13 +140,14 @@ public class PlayerScript : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!gameIsOver)
+        if ((!gameIsOver) && (MainGameManager.instance.isPuzzle() == false))
         {
             Vector2 position = rigidbody2d.position;
             position.x = position.x + 3.0f * horizontal * Time.deltaTime;
             position.y = position.y + 3.0f * vertical * Time.deltaTime;
             rigidbody2d.MovePosition(position);
         }
+        
     }
     public void ChangeHealth()
     {
@@ -168,11 +171,11 @@ public class PlayerScript : MonoBehaviour
 
         batteriesCollected.text = "" + batteries;
     }
-    public void AddKey(int num)
-    {
-        keys += num;
-        keysCollected.text = "" + keys;
-    }
+    //public void AddKey(int num)
+    //{
+    //    keys += num;
+    //    keysCollected.text = "" + keys;
+    //}
     public void AddFlashlight()
     {
         hasFlashlight = true;

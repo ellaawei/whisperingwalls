@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainGameManager : MonoBehaviour
 {
     public static MainGameManager instance;
 
-    [SerializeField] private string mainScene = "MainScene-pls no delete";
-    [SerializeField] private string slidingPuzzle = "SlidingPuzzleEEEEEE";
-    [SerializeField] private string mazePuzzle = "maze";
-    [SerializeField] private string pipesPuzzle = "PipePuzzle";
+    [SerializeField] private string mainScene;
+    [SerializeField] private string slidingPuzzle;
+    [SerializeField] private string mazePuzzle;
+    //[SerializeField] private string pipesPuzzle = "PipePuzzle";
+    [SerializeField] TextMeshProUGUI keyText;
+
+    int keys = 0;
+    bool inPuzzle = false;
 
     string currentScene = "";
 
@@ -43,6 +48,8 @@ public class MainGameManager : MonoBehaviour
         {
             Application.Quit();
         }
+        keyText.text = "" + keys;
+
     }
 
     public void NextLevel(int level)
@@ -50,25 +57,49 @@ public class MainGameManager : MonoBehaviour
         switch (level)
         {
             case 0:
-                SceneManager.UnloadSceneAsync(currentScene); 
+                SceneManager.UnloadSceneAsync(currentScene);
+                inPuzzle = false;
                 break;
             case 1:
                 SceneManager.LoadScene(slidingPuzzle, LoadSceneMode.Additive);
                 currentScene = slidingPuzzle;
+                inPuzzle = true;
                 break;
             case 2:
                 SceneManager.LoadScene(mazePuzzle, LoadSceneMode.Additive);
                 currentScene = mazePuzzle;
+                inPuzzle = true;
                 break;
-            case 3:
-                SceneManager.LoadScene(pipesPuzzle, LoadSceneMode.Additive);
-                currentScene = pipesPuzzle;
-                break;
+            //case 3:
+            //    SceneManager.LoadScene(pipesPuzzle, LoadSceneMode.Additive);
+            //    currentScene = pipesPuzzle;
+            //    break;
         }
     }
 
     public void restart()
     {
+        int keys = 0;
+        bool inPuzzle = false;
+
+        string currentScene = "";
+
         SceneManager.LoadScene(mainScene);
+    }
+
+    public void addKey(int amount)
+    {
+        keys += amount;
+        keyText.text = "" + keys;
+    }
+
+    public bool isPuzzle()
+    {
+        return inPuzzle;
+    }
+
+    public int getKeys()
+    {
+        return keys;
     }
 }

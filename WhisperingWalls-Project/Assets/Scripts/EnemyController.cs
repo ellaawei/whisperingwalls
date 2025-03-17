@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     int direction = 1;
     bool flip = true;
     public static int enemiesHit;
-    bool broken = true;
+    //bool broken = true;
     Animator animator;
     // Start is called before the first frame update
     void Start()

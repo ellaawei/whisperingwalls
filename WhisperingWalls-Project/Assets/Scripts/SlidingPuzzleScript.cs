@@ -60,6 +60,7 @@ public class SlidingPuzzleScript : MonoBehaviour
         if (hasWon)
         {
             //change the scene here
+            MainGameManager.instance.addKey(1);
             MainGameManager.instance.NextLevel(0);
         }
     }

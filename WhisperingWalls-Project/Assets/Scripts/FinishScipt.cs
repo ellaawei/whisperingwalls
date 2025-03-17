@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class FinishScipt : MonoBehaviour
@@ -23,8 +24,14 @@ public class FinishScipt : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "player")
+
+        BallMove ball = collision.GetComponent<BallMove>();
+        if (ball != null )
+        {
             isFinished = true;
+            MainGameManager.instance.addKey(1);
+        }
+
         // Add any additional actions like displaying a "You Win!" message
     }
 }

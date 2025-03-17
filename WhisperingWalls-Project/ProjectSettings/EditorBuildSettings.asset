@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SlidingPuzzleEEEEEE.unity
     guid: cd7602c7448eb184a909ce30744f50f0
+  - enabled: 1
+    path: Assets/Scenes/SlidingPuzzleTest.unity
+    guid: 0c4420236db7b174294aaa5156abc038
   m_configObjects: {}
