@@ -1,2 +1,2 @@
 # whisperingwalls
-the paintings are watching: dayana, ella, divya
+Original Game & Graphics. Made in Unity!
